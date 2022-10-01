@@ -1,0 +1,27 @@
+{
+  "name": "mycalculator",
+  "version": "1.0.0",
+  "description": "sample calculator using Alexa skill",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dep121/MyCalculator.git"
+  },
+  "keywords": [
+    "Alexa",
+    "calculator"
+  ],
+  "author": "Deepak kumar pandey",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dep121/MyCalculator/issues"
+  },
+  "homepage": "https://github.com/Dep121/MyCalculator#readme",
+  "dependencies": {
+    "ask-sdk-core": "^2.12.1",
+    "ask-sdk-model": "^1.39.0"
+  }
+}
