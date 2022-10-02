@@ -13,9 +13,9 @@ const LaunchRequestHandler = {
     },
     handle(handlerInput) {
         //welcome message
-        let speechText = '';
+        let speechText = 'Welcome to my calculator, You can say 2 plus 4 and 50 divide by 2';
         //welcome screen message
-        let displayText = ""
+        let displayText = 'Welcome to my calculator, You can say 2 plus 4 and 50 divide by 2';
         return handlerInput.responseBuilder
             .speak(speechText)
             .reprompt(speechText)
@@ -36,7 +36,7 @@ const HelpIntentHandler = {
     },
     handle(handlerInput) {
         //help text for your skill
-        let speechText = '';
+        let speechText = 'Welcome to my calculator, You can say 2 plus 4 and 50 divide by 2';
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -100,6 +100,37 @@ const AddIntent = {
             .getResponse();
         }
     }
+};
+
+const SubtractIntent = {
+    canHandle(handlerInput) {
+        return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+        && handlerInput.requestEnvelope.request.intent.name === 'SubtractIntent'
+    },
+    handle(handlerInput) {
+        let speechText = '';
+        let displayText = '';
+        let intent = handlerInput.requestEnvelope.request.intent;
+        let firstNumber = intent.slots.firstNumber.value;
+        let secondNumber = intent.slots.secondNumber.value;
+
+        if (firstNumber && secondNumber) {
+            // Perform operation
+            let result = parseInt(secondNumber) - parseInt(firstNumber);
+            speechText = `The result of ${secondNumber} minus ${firstNumber} is ${result}`;
+            displayText = `${result}`;
+
+            return handlerInput.responseBuilder
+            .speak(speechText)
+            .withSimpleCard(appName, displayText)
+            .withShouldEndSession(true)
+            .getResponse();
+        } else {
+            return handlerInput
+            .responseBuilder.addDelegateDirective(intent)
+            .getResponse();
+        }
+    }
 }
 
 //Lambda handler function
@@ -109,4 +140,5 @@ exports.handler = Alexa.SkillBuilders.custom()
                          HelpIntentHandler,
                          CancelAndStopIntentHandler,
                          SessionEndedRequestHandler,
-                         AddIntent).lambda();
+                         AddIntent,
+                         SubtractIntent).lambda();
